@@ -26,7 +26,7 @@ namespace JCV.Exercises.MovieAPI.API.Controllers
         {
             await _movieRepository.Create(movie);
 
-            return CreatedAtAction("GetMovie", movie.MovieId);
+            return Created($"/metadata/{movie.MovieId}", movie);
         } 
 
         [HttpGet("{movieId}")]
