@@ -33,7 +33,7 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
 
         private void LoadMoviesFromCSV(string fileName)
         {
-            Movies = File.ReadAllLines("C:\\Users\\Josh\\Sample.csv")
+            Movies = File.ReadAllLines(fileName)
                 .Skip(1)
                 .Select(line => GetMovieFromCSVLine(line))
                 .ToList();

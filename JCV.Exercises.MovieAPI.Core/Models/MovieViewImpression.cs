@@ -4,10 +4,9 @@ using System.Text;
 
 namespace JCV.Exercises.MovieAPI.Core.Models
 {
-    public class MovieStats
+    public class MovieViewImpression
     {
         public int MovieId { get; set; }
-        public int AverageWatchDurationS { get; set; }
-        public int Watches { get; set; }
+        public int watchDurationMs { get; set; }
     }
 }

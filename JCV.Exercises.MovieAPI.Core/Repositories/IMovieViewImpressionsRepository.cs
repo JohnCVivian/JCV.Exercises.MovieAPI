@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace JCV.Exercises.MovieAPI.Core.Repositories
 {
-    public interface IMovieStatsRepository
+    public interface IMovieViewImpressionsRepository
     {
-        Task<List<MovieStats>> Get();
+        Task<List<MovieViewImpression>> Get();
     }
 }
