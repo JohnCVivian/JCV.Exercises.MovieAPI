@@ -8,6 +8,8 @@ namespace JCV.Exercises.MovieAPI.Core.Repositories
 {
     public interface IMovieRepository
     {
-        Task Create(MovieInfo);
+        Task Create(MovieInfo movie);
+
+        Task<MovieInfo> Get(int id);
     }
 }
