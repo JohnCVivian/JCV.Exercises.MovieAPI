@@ -8,8 +8,4 @@
     <ProjectReference Include="..\JCV.Exercises.MovieAPI.Core\JCV.Exercises.MovieAPI.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Mock\" />
-  </ItemGroup>
-
 </Project>
