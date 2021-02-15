@@ -39,6 +39,7 @@ namespace JCV.Exercises.MovieAPI.API.Services
             foreach (int movieId in collectedImpressions.Keys)
             {
                 List<MovieInfo> movieInfo = await _movieRepository.Get(movieId);
+
                 MovieInfo movie = movieInfo.FirstOrDefault(movie => movie.Language == "EN");
 
                 // Fallback if no EN
@@ -48,13 +49,13 @@ namespace JCV.Exercises.MovieAPI.API.Services
                 }
 
                 var averageWatchDurationMS = collectedImpressions[movieId].Average(movieImpressions => movieImpressions.watchDurationMs);
-                var averageWatchDurationS = (int)Math.Round(averageWatchDurationMS * 1000);
+                var averageWatchDurationS = (int)Math.Round(averageWatchDurationMS / 1000);
 
                 movieStats.Add(new MovieStats
                 {
                     MovieId = movieId,
-                    Title = movie.Title,
-                    ReleaseYear = movie.ReleaseYear,
+                    Title = movie?.Title,
+                    ReleaseYear = movie?.ReleaseYear,
                     AverageWatchDurationS = averageWatchDurationS,
                     Watches = collectedImpressions[movieId].Count
                 });

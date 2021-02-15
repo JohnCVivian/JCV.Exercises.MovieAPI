@@ -20,7 +20,7 @@ namespace JCV.Exercises.MovieAPI.API.Controllers
             _movieStatsService = movieStatsService;
         }
 
-        [HttpGet("/stats")]
+        [HttpGet("stats")]
         public async Task<ActionResult<List<MovieStats>>> GetMovieStats(int movieId)
         {
             var movieStats = await _movieStatsService.GetAll();
