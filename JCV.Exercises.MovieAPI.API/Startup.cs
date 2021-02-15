@@ -29,7 +29,8 @@ namespace JCV.Exercises.MovieAPI.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IMovieRepository, MockMovieRepository>();
+            // added as a singelton to keep persistence 
+            services.AddSingleton<IMovieRepository, MockMovieRepository>();
             services.AddScoped<IMovieViewImpressionsRepository, MockMovieViewImpressionsRepository>();
 
             services.AddScoped<IMovieStatsService, MovieStatsService>();
