@@ -12,11 +12,13 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
     public class MockMovieViewImpressionsRepository : IMovieViewImpressionsRepository
     {
         List<MovieViewImpression> Impressions { get; set; }
-        public MockMovieViewImpressionsRepository(string fileName)
+        public MockMovieViewImpressionsRepository()
         {
+            // File name should come for IConfiguration in the Appsettings.json 
+            string filename = "Samples\\stats.csv";
             Impressions = new List<MovieViewImpression>();
 
-            LoadMoviesFromCSV(fileName);
+            LoadMoviesFromCSV(filename);
         }
         public Task<List<MovieViewImpression>> Get()
         {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
@@ -12,11 +13,14 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
     public class MockMovieRepository : IMovieRepository
     {
         List<MovieInfo> Movies { get; set; }
-        public MockMovieRepository (string fileName)
+        public MockMovieRepository ()
         {
+            // File name should come for IConfiguration in the Appsettings.json 
+            string filename = "Samples\\metadata.csv";
+
             Movies = new List<MovieInfo>();
 
-            LoadMoviesFromCSV(fileName);
+            LoadMoviesFromCSV(filename);
         }
 
         public Task Create(MovieInfo movie)
@@ -33,7 +37,7 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
 
         private void LoadMoviesFromCSV(string fileName)
         {
-            Movies = File.ReadAllLines(fileName)
+               Movies = File.ReadAllLines(fileName)
                 .Skip(1)
                 .Select(line => GetMovieFromCSVLine(line))
                 .ToList();
@@ -42,7 +46,9 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
         private static MovieInfo GetMovieFromCSVLine(string line)
         {
             // Should use morte robust Type Conversions / error checking
-            string[] fields = line.Split(',');
+
+            Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            string[] fields = CSVParser.Split(line);
 
             return new MovieInfo
             {
@@ -50,7 +56,7 @@ namespace JCV.Exercises.MovieAPI.Data.Repositories.Mock
                 MovieId = int.Parse(fields[1]),
                 Title = fields[2],
                 Language = fields[3],
-                Duration = TimeSpan.Parse(fields[4]),
+                Duration = fields[4],
                 ReleaseYear = fields[5]
             };
         }
